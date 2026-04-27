@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JESDIGITAL — Socios en tu Crecimiento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#07070a;
+  --paper:#f0ece3;
+  --fire:#ff4500;
+  --ember:#ff7c3a;
+  --gold:#c9a84c;
+  --dim:#111114;
+  --smoke:#18181c;
+  --mist:#222228;
+  --ash:#6b6b72;
+  --ff-d:'Bebas Neue',sans-serif;
+  --ff-s:'Cormorant Garamond',serif;
+  --ff-b:'Outfit',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);color:var(--paper);
+  font-family:var(--ff-b);font-weight:300;
+  line-height:1.6;overflow-x:hidden;cursor:none;
+}
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  opacity:.032;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* CURSOR */
+#cur{position:fixed;width:8px;height:8px;background:var(--fire);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);transition:width .15s,height .15s,opacity .2s}
+#cur-r{position:fixed;width:30px;height:30px;border:1px solid rgba(255,69,0,.38);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .28s,height .28s,opacity .28s}
+body:has(a:hover) #cur{width:12px;height:12px}
+body:has(a:hover) #cur-r{width:48px;height:48px;opacity:.35}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.3rem 4rem;
+}
+nav::before{
+  content:'';position:absolute;inset:0;
+  background:rgba(7,7,10,.8);backdrop-filter:blur(20px) saturate(160%);
+  border-bottom:1px solid rgba(255,255,255,.04);z-index:-1;
+}
+.logo{font-family:var(--ff-d);font-size:1.55rem;letter-spacing:.12em;color:var(--paper);text-decoration:none}
+.logo span{color:var(--fire)}
+.nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+.nav-links a{font-size:.68rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:rgba(240,236,227,.38);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--paper)}
+.nav-cta{
+  background:var(--fire)!important;color:var(--paper)!important;
+  padding:.48rem 1.3rem!important;border-radius:2px;
+  font-weight:600!important;
+  transition:transform .2s,box-shadow .2s!important;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(255,69,0,.5)!important}
+
+/* HERO */
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 4rem 4.5rem;position:relative;overflow:hidden;
+}
+#particles{position:absolute;inset:0;z-index:0}
+.hero-ambient{
+  position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse 65% 50% at 70% 30%,rgba(255,69,0,.1) 0%,transparent 65%),
+    radial-gradient(ellipse 45% 40% at 10% 80%,rgba(201,168,76,.055) 0%,transparent 55%);
+}
+.hero-cols{
+  position:absolute;inset:0;z-index:1;
+  background-image:repeating-linear-gradient(90deg,rgba(255,255,255,.016) 0,rgba(255,255,255,.016) 1px,transparent 1px,transparent calc(100%/12));
+}
+.hero-content{position:relative;z-index:2}
+.hero-eyebrow{
+  font-family:var(--ff-s);font-style:italic;font-size:1.05rem;font-weight:300;
+  color:var(--ember);margin-bottom:1.6rem;
+  display:flex;align-items:center;gap:.9rem;
+  opacity:0;animation:fadeUp .7s .2s forwards;
+}
+.hero-eyebrow::before{content:'';width:36px;height:1px;background:var(--ember)}
+h1.main{
+  font-family:var(--ff-d);
+  font-size:clamp(5rem,13vw,15rem);
+  line-height:.86;
+  margin-bottom:3.5rem;
+}
+h1.main .ln{display:block;overflow:hidden}
+h1.main .ln span{display:block;opacity:0;animation:slideUp .9s cubic-bezier(.16,1,.3,1) forwards}
+h1.main .ln:nth-child(1) span{animation-delay:.3s}
+h1.main .ln:nth-child(2) span{animation-delay:.45s}
+h1.main .ln:nth-child(3) span{animation-delay:.6s;color:var(--fire)}
+.hero-bot{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:3rem;
+  opacity:0;animation:fadeUp .7s .95s forwards;
+}
+.hero-sub{max-width:430px;font-size:.92rem;font-weight:300;color:rgba(240,236,227,.48);line-height:1.88}
+.hero-sub strong{color:var(--paper);font-weight:500}
+.hero-btns{display:flex;gap:1rem;align-items:center;flex-shrink:0}
+
+/* BUTTONS */
+.btn-fire{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:var(--fire);color:var(--paper);
+  font-weight:600;font-size:.84rem;letter-spacing:.05em;
+  padding:.95rem 2rem;border-radius:2px;text-decoration:none;
+  position:relative;overflow:hidden;
+  transition:transform .25s,box-shadow .25s;
+}
+.btn-fire::before{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  transition:left .5s;
+}
+.btn-fire:hover{transform:translateY(-3px);box-shadow:0 14px 44px rgba(255,69,0,.5)}
+.btn-fire:hover::before{left:100%}
+.btn-ghost{
+  display:inline-flex;align-items:center;gap:.5rem;
+  color:rgba(240,236,227,.48);font-size:.8rem;letter-spacing:.08em;
+  text-decoration:none;transition:color .2s;white-space:nowrap;
+}
+.btn-ghost:hover{color:var(--paper)}
+.arr{
+  width:30px;height:30px;border:1px solid rgba(240,236,227,.2);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;font-size:.72rem;
+  transition:border-color .2s,transform .2s;
+}
+.btn-ghost:hover .arr{border-color:var(--paper);transform:rotate(45deg)}
+.btn-dark{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:var(--ink);color:var(--paper);
+  font-weight:600;font-size:.84rem;letter-spacing:.05em;
+  padding:.95rem 2rem;border-radius:2px;text-decoration:none;
+  transition:transform .25s,box-shadow .25s;
+}
+.btn-dark:hover{transform:translateY(-3px);box-shadow:0 12px 38px rgba(7,7,10,.35)}
+.btn-ol{
+  display:inline-flex;align-items:center;gap:.5rem;
+  border:1px solid rgba(255,255,255,.16);color:rgba(240,236,227,.58);
+  font-size:.82rem;font-weight:500;letter-spacing:.05em;
+  padding:.9rem 1.7rem;border-radius:2px;text-decoration:none;
+  transition:border-color .2s,color .2s;
+}
+.btn-ol:hover{border-color:var(--paper);color:var(--paper)}
+
+/* MARQUEE */
+.mq-wrap{background:var(--fire);overflow:hidden;white-space:nowrap;padding:.65rem 0}
+.mq-track{display:inline-block;animation:mqFwd 22s linear infinite}
+.mq-track span{font-family:var(--ff-d);font-size:.95rem;letter-spacing:.25em;margin:0 2.2rem;color:var(--paper)}
+.mq-track .sep{color:rgba(255,255,255,.32)}
+@keyframes mqFwd{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* STATS */
+.stats-bar{display:grid;grid-template-columns:repeat(3,1fr);background:var(--paper)}
+.stat-cell{
+  background:var(--paper);padding:2.4rem 2.5rem;text-align:center;
+  position:relative;
+}
+.stat-cell+.stat-cell::before{content:'';position:absolute;left:0;top:22%;bottom:22%;width:1px;background:rgba(0,0,0,.1)}
+.sn{font-family:var(--ff-d);font-size:clamp(2.8rem,4.5vw,5rem);color:var(--ink);line-height:1;margin-bottom:.4rem}
+.sn .fire{color:var(--fire)}
+.sl{font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(6,6,6,.38)}
+
+/* SECTION */
+.sec{padding:4.5rem 4rem}
+.lbl{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-size:.63rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ember);margin-bottom:1.4rem;
+}
+.lbl::before{content:'';width:22px;height:1px;background:var(--ember)}
+.hd{
+  font-family:var(--ff-d);
+  font-size:clamp(3rem,6.5vw,7.5rem);
+  line-height:.88;letter-spacing:.015em;margin-bottom:1.4rem;
+}
+.hd em{font-style:normal;color:var(--fire)}
+.hds{
+  font-family:var(--ff-s);
+  font-size:clamp(2rem,3.8vw,4rem);
+  font-weight:300;font-style:italic;line-height:1.18;margin-bottom:1.4rem;
+}
+.hds strong{font-style:normal;font-weight:600;color:var(--fire)}
+.body{color:rgba(240,236,227,.47);font-size:.92rem;line-height:1.9;max-width:520px}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.rv.on{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.34s}.d4{transition-delay:.46s}
+
+/* GEOMETRIC DECORATIONS */
+.geo-ring{
+  position:absolute;border-radius:50%;
+  border:1px solid rgba(255,69,0,.12);
+  pointer-events:none;
+  animation:spin linear infinite;
+}
+@keyframes spin{from{transform:rotate(0deg) translate(-50%,-50%)}to{transform:rotate(360deg) translate(-50%,-50%)}}
+.geo-dot{
+  position:absolute;width:3px;height:3px;border-radius:50%;
+  background:var(--fire);opacity:.4;pointer-events:none;
+}
+.glow-blob{
+  position:absolute;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,69,0,.18) 0%,transparent 70%);
+  filter:blur(60px);pointer-events:none;
+  animation:blobPulse 7s ease-in-out infinite alternate;
+}
+@keyframes blobPulse{from{opacity:.6;transform:scale(1)}to{opacity:1;transform:scale(1.15)}}
+@keyframes spinRev{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+
+/* FILOSOFIA */
+#filosofia{
+  background:var(--smoke);
+  position:relative;overflow:hidden;
+}
+#filosofia::before{
+  content:'';position:absolute;top:-30%;right:-10%;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,69,0,.07) 0%,transparent 65%);
+  pointer-events:none;
+}
+.philo-lay{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.philo-visual{position:relative;height:360px;display:flex;align-items:center;justify-content:center;}
+.philo-word{
+  font-family:var(--ff-d);
+  font-size:clamp(6rem,12vw,14rem);
+  color:rgba(255,69,0,.06);
+  line-height:1;letter-spacing:.02em;
+  position:absolute;
+  animation:wordFloat 6s ease-in-out infinite alternate;
+}
+@keyframes wordFloat{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-16px) rotate(2deg)}}
+.philo-card{
+  position:relative;z-index:2;
+  border:1px solid rgba(255,69,0,.18);
+  background:rgba(255,69,0,.04);
+  padding:2.5rem;border-radius:3px;
+  max-width:300px;
+}
+.philo-card-n{
+  font-family:var(--ff-d);font-size:4rem;color:rgba(255,69,0,.25);
+  line-height:1;margin-bottom:.8rem;
+}
+.philo-card h4{font-family:var(--ff-s);font-size:1.2rem;font-weight:600;margin-bottom:.5rem}
+.philo-card p{color:var(--ash);font-size:.84rem;line-height:1.7}
+.philo-tag{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:rgba(255,69,0,.1);border:1px solid rgba(255,69,0,.2);
+  color:var(--fire);font-size:.65rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;
+  padding:.36rem .88rem;border-radius:2px;margin-bottom:1.8rem;width:fit-content;
+}
+.philo-text p{color:rgba(240,236,227,.48);font-size:.92rem;line-height:1.92;margin-bottom:1.1rem}
+
+/* SISTEMA */
+#sistema{background:var(--ink);position:relative;overflow:hidden}
+.sis-intro{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:3rem;align-items:end;
+  margin-bottom:3rem;padding-bottom:2.5rem;
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.sis-steps{
+  counter-reset:step;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:rgba(255,255,255,.05);
+}
+.sis-step{
+  background:var(--ink);padding:2.5rem 2rem;
+  position:relative;overflow:hidden;
+  transition:background .4s;
+  counter-increment:step;
+}
+.sis-step::before{
+  content:counter(step,decimal-leading-zero);
+  font-family:var(--ff-d);
+  font-size:6rem;color:rgba(255,69,0,.07);
+  line-height:1;position:absolute;top:1.5rem;right:1.5rem;
+  transition:color .4s;
+}
+.sis-step:hover{background:var(--dim)}
+.sis-step:hover::before{color:rgba(255,69,0,.18)}
+.sis-step::after{
+  content:'';position:absolute;bottom:-40px;left:-40px;
+  width:120px;height:120px;border-radius:50%;
+  background:var(--fire);filter:blur(50px);
+  opacity:0;transition:opacity .45s;pointer-events:none;
+}
+.sis-step:hover::after{opacity:.18}
+.sis-icon{
+  width:50px;height:50px;
+  border:1px solid rgba(255,69,0,.2);
+  background:rgba(255,69,0,.06);
+  border-radius:4px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;margin-bottom:1.8rem;
+  transition:background .3s,border-color .3s;
+}
+.sis-step:hover .sis-icon{background:rgba(255,69,0,.14);border-color:rgba(255,69,0,.45)}
+.sis-step h3{font-family:var(--ff-s);font-size:1.35rem;font-weight:600;margin-bottom:.7rem}
+.sis-step p{color:var(--ash);font-size:.86rem;line-height:1.75}
+/* big decoration */
+#sistema .deco-text{
+  position:absolute;bottom:-2rem;left:50%;transform:translateX(-50%);
+  font-family:var(--ff-d);font-size:20vw;
+  color:rgba(255,255,255,.015);white-space:nowrap;pointer-events:none;
+  letter-spacing:.05em;
+}
+
+/* CASOS */
+#casos{background:var(--smoke);position:relative;overflow:hidden}
+.casos-hdr{margin-bottom:2.5rem}
+.casos-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1px;background:rgba(255,255,255,.05);
+}
+.caso{
+  background:var(--smoke);padding:3rem 3rem;
+  position:relative;overflow:hidden;transition:background .4s;
+}
+.caso::after{
+  content:attr(data-n);position:absolute;right:1rem;bottom:.2rem;
+  font-family:var(--ff-d);font-size:12rem;
+  color:rgba(255,255,255,.022);line-height:1;
+  pointer-events:none;transition:color .4s;
+}
+.caso:hover{background:var(--mist)}
+.caso:hover::after{color:rgba(255,69,0,.07)}
+.caso-cl{
+  font-family:var(--ff-s);font-style:italic;font-size:1rem;
+  color:var(--ember);margin-bottom:1.4rem;
+}
+.caso-big{
+  font-family:var(--ff-d);
+  font-size:clamp(2rem,3.2vw,3.5rem);
+  line-height:.93;margin-bottom:1.4rem;
+}
+.caso-big .hl{color:var(--fire)}
+.caso p{color:var(--ash);font-size:.85rem;line-height:1.7}
+
+/* PROCESO */
+#proceso{background:var(--ink);position:relative;overflow:hidden}
+#proceso .deco-ring{
+  position:absolute;top:50%;right:-200px;
+  width:600px;height:600px;border-radius:50%;
+  border:1px solid rgba(255,69,0,.06);
+  transform:translateY(-50%);
+  pointer-events:none;
+}
+#proceso .deco-ring2{
+  position:absolute;top:50%;right:-120px;
+  width:400px;height:400px;border-radius:50%;
+  border:1px solid rgba(255,69,0,.04);
+  transform:translateY(-50%);
+  pointer-events:none;
+}
+.proc-lay{display:grid;grid-template-columns:1fr;gap:4rem;align-items:start;max-width:720px}
+.proc-visual{
+  position:sticky;top:9rem;
+  height:500px;display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.proc-hexagon{
+  width:300px;height:300px;
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+}
+.proc-hexagon::before{
+  content:'';position:absolute;inset:0;
+  border:1px solid rgba(255,69,0,.15);border-radius:50%;
+  animation:spinSlow 25s linear infinite;
+}
+.proc-hexagon::after{
+  content:'';position:absolute;
+  inset:30px;
+  border:1px solid rgba(255,69,0,.08);border-radius:50%;
+  animation:spinSlow 18s linear infinite reverse;
+}
+.proc-center{
+  position:relative;z-index:2;text-align:center;
+}
+.proc-center-n{
+  font-family:var(--ff-d);font-size:4.5rem;color:var(--fire);line-height:1;
+  animation:counterPulse 3s ease-in-out infinite alternate;
+}
+@keyframes counterPulse{from{opacity:.7}to{opacity:1}}
+.proc-center-l{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ash);margin-top:.3rem}
+.proc-outer{position:absolute;width:380px;height:380px;border-radius:50%;border:1px dashed rgba(255,255,255,.04)}
+.plist{display:flex;flex-direction:column}
+.pi{
+  display:flex;gap:1.4rem;padding:2rem 0;
+  border-bottom:1px solid rgba(255,255,255,.045);align-items:flex-start;
+}
+.pi:first-child{border-top:1px solid rgba(255,255,255,.045)}
+.pi-icon{
+  width:46px;height:46px;flex-shrink:0;
+  border:1px solid rgba(255,69,0,.2);border-radius:3px;
+  display:flex;align-items:center;justify-content:center;font-size:1.05rem;
+  background:rgba(255,69,0,.04);transition:background .3s,border-color .3s;
+}
+.pi:hover .pi-icon{background:rgba(255,69,0,.13);border-color:rgba(255,69,0,.5)}
+.pi h3{font-family:var(--ff-s);font-size:1.18rem;font-weight:600;margin-bottom:.35rem}
+.pi p{color:var(--ash);font-size:.86rem;line-height:1.72}
+@keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* PORQUE */
+#porque{background:var(--smoke);position:relative;overflow:hidden}
+.porque-lay{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.porque-list{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.pl-item{
+  display:flex;align-items:center;gap:1rem;
+  padding:.9rem 1.2rem;
+  border:1px solid rgba(255,255,255,.04);
+  transition:border-color .3s,background .3s;
+  font-size:.9rem;color:rgba(240,236,227,.62);
+}
+.pl-item:hover{border-color:rgba(255,69,0,.3);background:rgba(255,69,0,.04)}
+.pl-item::before{
+  content:'✓';width:20px;height:20px;flex-shrink:0;
+  border:1px solid rgba(255,69,0,.38);border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.6rem;color:var(--fire);font-weight:700;
+}
+.porque-visual{
+  position:relative;height:440px;
+  display:flex;align-items:center;justify-content:center;
+}
+.pq-big{
+  font-family:var(--ff-d);font-size:clamp(5rem,10vw,12rem);
+  line-height:.88;color:rgba(255,69,0,.08);
+  text-align:center;
+  animation:wordFloat 7s ease-in-out infinite alternate;
+  position:absolute;
+}
+.pq-card{
+  position:relative;z-index:2;
+  border:1px solid rgba(255,255,255,.07);
+  background:rgba(255,255,255,.02);
+  padding:2rem 2.5rem;border-radius:3px;
+  text-align:center;min-width:220px;
+}
+.pq-card-n{font-family:var(--ff-d);font-size:3.5rem;color:var(--fire);margin-bottom:.3rem}
+.pq-card-l{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ash)}
+
+/* CTA */
+#cta{background:var(--paper);padding:6rem 4rem}
+.cta-in{
+  max-width:1000px;margin:0 auto;
+  display:grid;grid-template-columns:1.3fr 1fr;align-items:center;gap:7rem;
+}
+.cta-hl{
+  font-family:var(--ff-d);
+  font-size:clamp(4rem,8.5vw,10rem);
+  line-height:.84;color:var(--ink);
+}
+.cta-hl .red{color:var(--fire)}
+.cta-r p{color:rgba(6,6,6,.5);font-size:.93rem;line-height:1.85;margin-bottom:2.4rem}
+.cta-note{margin-top:1rem;font-size:.7rem;color:rgba(6,6,6,.28);letter-spacing:.06em}
+
+/* CONTACTO */
+#contacto{background:var(--smoke);padding:4.5rem 4rem;position:relative;overflow:hidden}
+#contacto::before{
+  content:'';position:absolute;top:50%;left:50%;
+  width:700px;height:700px;
+  background:radial-gradient(circle,rgba(255,69,0,.06) 0%,transparent 65%);
+  transform:translate(-50%,-50%);pointer-events:none;
+}
+.contact-lay{display:grid;grid-template-columns:1fr;gap:3rem;max-width:640px}
+.contact-left h2{margin-bottom:1.5rem}
+.contact-left p{color:rgba(240,236,227,.48);font-size:.92rem;line-height:1.9;margin-bottom:2.5rem}
+.cc-list{display:flex;flex-direction:column;gap:.6rem}
+.cc{
+  display:flex;align-items:center;gap:1.2rem;
+  padding:1.2rem 1.5rem;
+  border:1px solid rgba(255,255,255,.06);border-radius:2px;
+  text-decoration:none;transition:border-color .3s,background .3s;
+}
+.cc:hover{border-color:rgba(255,69,0,.38);background:rgba(255,69,0,.05)}
+.cc-icon{
+  width:44px;height:44px;flex-shrink:0;
+  border-radius:3px;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
+}
+.cc-wa{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.18)}
+.cc-tel{background:rgba(255,69,0,.09);border:1px solid rgba(255,69,0,.18)}
+.cc-mail{background:rgba(255,140,66,.09);border:1px solid rgba(255,140,66,.18)}
+.cc-txt strong{display:block;font-weight:600;font-size:.88rem;margin-bottom:.1rem;color:var(--paper)}
+.cc-txt span{font-size:.76rem;color:var(--ash)}
+
+/* CONTACT VISUAL */
+.contact-visual{
+  position:relative;height:460px;
+  display:flex;align-items:center;justify-content:center;
+}
+.cv-outer{
+  position:absolute;
+  width:380px;height:380px;border-radius:50%;
+  border:1px solid rgba(255,69,0,.09);
+  animation:spinSlow 35s linear infinite;
+}
+.cv-mid{
+  position:absolute;
+  width:270px;height:270px;border-radius:50%;
+  border:1px dashed rgba(255,69,0,.06);
+  animation:spinSlow 22s linear infinite reverse;
+}
+.cv-inner{
+  position:absolute;
+  width:160px;height:160px;border-radius:50%;
+  border:1px solid rgba(255,69,0,.12);
+  animation:spinSlow 14s linear infinite;
+}
+.cv-center{
+  position:relative;z-index:2;text-align:center;
+}
+.cv-phone{
+  font-family:var(--ff-d);font-size:clamp(1.8rem,3vw,3rem);
+  color:var(--paper);letter-spacing:.06em;line-height:1;margin-bottom:.5rem;
+}
+.cv-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,236,227,.25)}
+.cv-dots{position:absolute;inset:0}
+.cv-dot{
+  position:absolute;width:4px;height:4px;background:var(--fire);
+  border-radius:50%;opacity:.5;
+}
+
+/* FINAL */
+#final{background:var(--dim);padding:4.5rem 4rem;position:relative;overflow:hidden}
+#final::before{
+  content:'SOCIOS';
+  position:absolute;bottom:-2rem;left:50%;transform:translateX(-50%);
+  font-family:var(--ff-d);font-size:22vw;
+  color:rgba(255,255,255,.012);pointer-events:none;
+  white-space:nowrap;letter-spacing:.05em;
+}
+.final-lay{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.final-text p{color:rgba(240,236,227,.48);font-size:.92rem;line-height:1.92;margin-bottom:.9rem}
+.fbtns{display:flex;gap:1rem;margin-top:2.5rem;flex-wrap:wrap}
+
+/* WA FLOAT */
+#wa-float{
+  position:fixed;bottom:2rem;right:2rem;z-index:600;
+  width:56px;height:56px;border-radius:50%;
+  background:#25d366;
+  display:flex;align-items:center;justify-content:center;
+  text-decoration:none;
+  box-shadow:0 6px 24px rgba(37,211,102,.45);
+  transition:transform .25s,box-shadow .25s;
+  animation:waPulse 3s ease-in-out infinite;
+}
+#wa-float:hover{transform:scale(1.1);box-shadow:0 10px 36px rgba(37,211,102,.65)}
+#wa-float svg{width:28px;height:28px;fill:#fff}
+@keyframes waPulse{
+  0%,100%{box-shadow:0 6px 24px rgba(37,211,102,.45),0 0 0 0 rgba(37,211,102,.3)}
+  50%{box-shadow:0 6px 24px rgba(37,211,102,.45),0 0 0 14px rgba(37,211,102,0)}
+}
+
+/* FOOTER */
+footer{
+  background:var(--ink);border-top:1px solid rgba(255,255,255,.04);
+  padding:2.8rem 4rem;
+  display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:3rem;
+}
+.f-logo{font-family:var(--ff-d);font-size:1.35rem;letter-spacing:.12em;color:var(--paper);text-decoration:none}
+.f-logo span{color:var(--fire)}
+.f-sub{font-size:.7rem;color:var(--ash);margin-top:.25rem}
+.f-cg{display:flex;flex-direction:column;gap:.2rem}
+.f-cl{font-size:.6rem;text-transform:uppercase;letter-spacing:.16em;color:var(--ash)}
+.f-cv{font-size:.82rem;color:var(--paper)}
+.f-cv a{color:var(--paper);text-decoration:none}
+.f-cv a:hover{color:var(--fire)}
+
+/* KEYFRAMES */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes slideUp{from{opacity:0;transform:translateY(100%)}to{opacity:1;transform:none}}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:1.1rem 1.4rem}
+  .nav-links{display:none}
+  .sec{padding:3.5rem 1.4rem}
+  #hero{padding:0 1.4rem 4rem}
+  .hero-bot{flex-direction:column;align-items:flex-start;gap:2rem}
+  .philo-lay,.sis-intro,.proc-lay,.porque-lay,.cta-in,.contact-lay,.final-lay{grid-template-columns:1fr;gap:3rem}
+  .sis-steps{grid-template-columns:1fr}
+  .casos-grid{grid-template-columns:1fr}
+  footer{grid-template-columns:1fr;gap:1.5rem}
+  .stats-bar{grid-template-columns:1fr}
+  .proc-visual,.philo-visual,.porque-visual,.contact-visual{height:280px}
+  .proc-hexagon{width:200px;height:200px}
+}
+</style>
+</head>
+<body>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/34611061767?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n" id="wa-float" target="_blank" rel="noopener" title="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- CURSOR -->
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">JES<span>·</span>DIGITAL</a>
+  <ul class="nav-links">
+    <li><a href="#sistema">Sistema</a></li>
+    <li><a href="#casos">Casos</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="https://wa.me/34611061767?text=Hola%2C%20me%20gustar%C3%ADa%20hablar%20con%20vosotros" class="nav-cta">Escríbenos ↗</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="particles"></canvas>
+  <div class="hero-ambient"></div>
+  <div class="hero-cols"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Agencia de Marketing · Barcelona · +8 años</p>
+    <h1 class="main">
+      <span class="ln"><span>SOCIOS</span></span>
+      <span class="ln"><span>EN TU</span></span>
+      <span class="ln"><span>CRECIMIENTO.</span></span>
+    </h1>
+    <div class="hero-bot">
+      <p class="hero-sub">No vendemos campañas sueltas. <strong>Construimos tu sistema de captación de clientes</strong> desde los cimientos: conocemos tu negocio, analizamos tu mercado y montamos la estrategia que necesitas.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/34611061767?text=Hola%2C%20me%20gustar%C3%ADa%20que%20analicéis%20mi%20negocio" class="btn-fire">Quiero Más Clientes ↗</a>
+        <a href="#proceso" class="btn-ghost">Cómo trabajamos <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq-wrap">
+  <div class="mq-track">
+    <span>SISTEMA DE CAPTACIÓN</span><span class="sep"> ✦ </span>
+    <span>MÁS CLIENTES</span><span class="sep"> ✦ </span>
+    <span>ROI 2.567%</span><span class="sep"> ✦ </span>
+    <span>+7M VISITAS</span><span class="sep"> ✦ </span>
+    <span>ESTRATEGIA A MEDIDA</span><span class="sep"> ✦ </span>
+    <span>SOCIOS EN TU NEGOCIO</span><span class="sep"> ✦ </span>
+    <span>BARCELONA</span><span class="sep"> ✦ </span>
+    <span>SISTEMA DE CAPTACIÓN</span><span class="sep"> ✦ </span>
+    <span>MÁS CLIENTES</span><span class="sep"> ✦ </span>
+    <span>ROI 2.567%</span><span class="sep"> ✦ </span>
+    <span>+7M VISITAS</span><span class="sep"> ✦ </span>
+    <span>ESTRATEGIA A MEDIDA</span><span class="sep"> ✦ </span>
+    <span>SOCIOS EN TU NEGOCIO</span><span class="sep"> ✦ </span>
+    <span>BARCELONA</span><span class="sep"> ✦ </span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-cell">
+    <div class="sn"><span class="counter" data-target="8">0</span><span class="fire">+</span></div>
+    <div class="sl">Años de experiencia</div>
+  </div>
+  <div class="stat-cell">
+    <div class="sn"><span class="counter fire" data-target="2567">0</span><span class="fire">%</span></div>
+    <div class="sl">ROI máximo conseguido</div>
+  </div>
+  <div class="stat-cell">
+    <div class="sn">+<span class="counter" data-target="7">0</span><span>M</span></div>
+    <div class="sl">Visitas generadas</div>
+  </div>
+</div>
+
+<!-- FILOSOFIA -->
+<section id="filosofia" class="sec">
+  <div class="philo-lay">
+    <div class="philo-visual rv">
+      <div class="philo-word">SOCIOS</div>
+      <div class="philo-card">
+        <div class="philo-card-n">8+</div>
+        <h4>Años creando negocios desde cero</h4>
+        <p>No venimos del manual. Venimos de haber construido y escalado proyectos reales.</p>
+      </div>
+    </div>
+    <div>
+      <div class="philo-tag rv">Nuestra Filosofía</div>
+      <h2 class="hds rv d1">Nos implicamos como si <strong>fuese nuestro negocio</strong></h2>
+      <p class="philo-text rv d2">En JESDIGITAL no encontrarás proveedores distantes. Somos parte de tu equipo, compartimos objetivos y trabajamos sin parar para que tu negocio crezca de verdad.</p>
+      <p class="philo-text rv d3">Antes de montar cualquier estrategia, nos sentamos a entender tu negocio, tu mercado y tus clientes. Sin eso, no hay sistema que funcione.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SISTEMA -->
+<section id="sistema" class="sec">
+  <div class="sis-intro">
+    <div>
+      <div class="lbl rv">Nuestro Sistema</div>
+      <h2 class="hd rv d1">UN SISTEMA<br><em>COMPLETO</em><br>DE CAPTACIÓN</h2>
+    </div>
+    <p class="body rv d2">No vendemos campañas sueltas. Construimos un sistema que trabaja para ti todos los días: desde conocer tu negocio hasta cerrar clientes. Un proceso integral, a medida y con resultados medibles.</p>
+  </div>
+  <div class="sis-steps">
+    <div class="sis-step rv">
+      <div class="sis-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ember)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      <h3>Conocemos tu Negocio</h3>
+      <p>Antes de hacer nada, nos metemos de lleno en tu negocio. Analizamos tu sector, tu competencia, tus clientes y lo que te diferencia. Sin atajos.</p>
+    </div>
+    <div class="sis-step rv d1">
+      <div class="sis-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ember)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <h3>Diseñamos la Estrategia</h3>
+      <p>Con toda la información encima de la mesa, montamos una estrategia de captación personalizada. No plantillas. No lo que le funciona a otro. Lo que te funciona a ti.</p>
+    </div>
+    <div class="sis-step rv d2">
+      <div class="sis-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ember)"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div>
+      <h3>Montamos el Sistema</h3>
+      <p>Implementamos todos los canales y herramientas necesarios para que el flujo de clientes sea constante: presencia digital, contenido, publicidad y automatizaciones.</p>
+    </div>
+    <div class="sis-step rv d1">
+      <div class="sis-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ember)"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+      <h3>Medimos y Optimizamos</h3>
+      <p>Cada acción genera datos. Usamos esos datos para mejorar el sistema de forma continua. Lo que funciona, se escala. Lo que no, se cambia.</p>
+    </div>
+    <div class="sis-step rv d2">
+      <div class="sis-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ember)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3>Crecemos Juntos</h3>
+      <p>Tu éxito es el nuestro. Evolucionamos la estrategia con tu negocio, adaptándonos a cada fase de crecimiento para que los resultados no paren.</p>
+    </div>
+    <div class="sis-step rv d3">
+      <div class="sis-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ember)"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <h3>Resultados Tangibles</h3>
+      <p>Sin métricas de vanidad. Nos centramos en lo que importa: más clientes, más facturación y un sistema que sigue funcionando a largo plazo.</p>
+    </div>
+  </div>
+  <div class="deco-text">SISTEMA</div>
+</section>
+
+<!-- CASOS -->
+<section id="casos" class="sec">
+  <div class="casos-hdr">
+    <div class="lbl rv">Casos Reales</div>
+    <h2 class="hd rv d1">CLIENTES QUE<br><em>CRECIERON</em></h2>
+  </div>
+  <div class="casos-grid">
+    <div class="caso rv" data-n="01">
+      <div class="caso-cl">Taller de Cocina</div>
+      <div class="caso-big">382 VENTAS EN <span class="hl">20 DÍAS</span><br>900€ → 24.000€</div>
+      <p>Solo 20 días. ROI del 2.567% partiendo de una inversión mínima. De cero a 382 ventas con un sistema de captación montado desde cero.</p>
+    </div>
+    <div class="caso rv d1" data-n="02">
+      <div class="caso-cl">Hamburguería Online</div>
+      <div class="caso-big">MARCA + WEB +<br><span class="hl">SISTEMA COMPLETO</span></div>
+      <p>Creación de marca desde cero, identidad visual, web con sistema de pedidos online, redes sociales y estrategia de captación de clientes. Un negocio listo para escalar desde el día uno.</p>
+    </div>
+    <div class="caso rv d2" data-n="03">
+      <div class="caso-cl">Arte Personalizado Online</div>
+      <div class="caso-big">DE 0 A <span class="hl">+300 PEDIDOS</span><br>AL MES</div>
+      <p>En menos de 90 días. Solo con publicidad y redes sociales, un negocio de arte personalizado pasó de no existir a recibir más de 300 pedidos mensuales.</p>
+    </div>
+    <div class="caso rv d3" data-n="04">
+      <div class="caso-cl">Academia de Diseño Digital</div>
+      <div class="caso-big">+50 ALUMNOS<br><span class="hl">EN SU LANZAMIENTO</span></div>
+      <p>Producción de todos los contenidos, plataforma de cursos y estrategia de lanzamiento. Más de 50 alumnos captados en el primer mes desde cero.</p>
+    </div>
+    <div class="caso rv d1" data-n="05">
+      <div class="caso-cl">Gestacars</div>
+      <div class="caso-big">+200 COMPRAVENTAS<br>EN <span class="hl">&lt;90 DÍAS</span></div>
+      <p>Beneficio superior a 50.000€ para sus clientes. Transformación digital completa desde la base hasta el sistema de captación.</p>
+    </div>
+    <div class="caso rv d2" data-n="06">
+      <div class="caso-cl">Revisamostumoto.es</div>
+      <div class="caso-big">+10K SEGUIDORES<br><span class="hl">+5.000.000</span> VISITAS</div>
+      <p>En 90 días. Proyecto creado desde cero: estrategia, web, servicios y sistema de captación completo en tiempo récord.</p>
+    </div>
+    <div class="caso rv d3" data-n="07" style="grid-column:1/-1">
+      <div class="caso-cl">Alquiler de Coches</div>
+      <div class="caso-big">+<span class="hl">1M VISITAS</span> · +4.000 SEGUIDORES<br>CON MENOS DE 6 VÍDEOS VIRALES</div>
+      <p>Captación orgánica desde el primer contenido publicado. Un sistema que sigue generando clientes nuevos de forma constante sin aumentar la inversión.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso" class="sec">
+  <div class="deco-ring"></div>
+  <div class="deco-ring2"></div>
+  <div class="proc-lay">
+    <div>
+      <div class="lbl rv">Cómo Trabajamos</div>
+      <h2 class="hds rv d1">Un proceso <strong>claro, honesto</strong> y sin letra pequeña</h2>
+      <p class="body rv d2" style="margin-bottom:2rem">Desde el primer día sabréis exactamente en qué fase estamos y qué está pasando con vuestro negocio.</p>
+      <div class="plist">
+        <div class="pi rv">
+          <div class="pi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ember)"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+          <div>
+            <h3>Análisis a fondo</h3>
+            <p>Nos sumergimos en tu negocio: sector, competencia, audiencia, puntos fuertes y oportunidades reales de crecimiento.</p>
+          </div>
+        </div>
+        <div class="pi rv d1">
+          <div class="pi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ember)"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></div>
+          <div>
+            <h3>Estrategia personalizada</h3>
+            <p>Diseñamos un plan a medida con objetivos claros y plazos realistas. Sin promesas vacías.</p>
+          </div>
+        </div>
+        <div class="pi rv d2">
+          <div class="pi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ember)"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+          <div>
+            <h3>Implementación y seguimiento</h3>
+            <p>Montamos el sistema, lo ponemos en marcha y lo optimizamos de forma continua con datos reales.</p>
+          </div>
+        </div>
+        <div class="pi rv d3">
+          <div class="pi-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ember)"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+          <div>
+            <h3>Escalado y crecimiento</h3>
+            <p>Lo que funciona lo escalamos. Evolucionamos contigo para que los resultados no tengan techo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PORQUE -->
+<section id="porque" class="sec">
+  <div class="porque-lay">
+    <div>
+      <div class="lbl rv">Por Qué Elegirnos</div>
+      <h2 class="hd rv d1">LO QUE NOS<br><em>DIFERENCIA</em></h2>
+      <p class="body rv d2" style="margin-bottom:2rem">No somos otra agencia más que ejecuta y cobra. Somos socios que se implican de verdad.</p>
+      <ul class="porque-list">
+        <li class="pl-item rv">Analizamos tu negocio antes de proponer cualquier acción</li>
+        <li class="pl-item rv d1">Construimos sistemas, no acciones sueltas sin hilo conductor</li>
+        <li class="pl-item rv d2">Transparencia total: sabrás qué hacemos y por qué en todo momento</li>
+        <li class="pl-item rv d3">Nos involucramos como si el negocio fuese nuestro</li>
+        <li class="pl-item rv d4">Resultados medibles desde el primer mes, sin excusas</li>
+        <li class="pl-item rv">+8 años creando y escalando proyectos desde cero</li>
+      </ul>
+    </div>
+    <div class="porque-visual rv d2">
+      <div class="pq-big">8+<br>AÑOS</div>
+      <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:1px;width:100%;max-width:260px">
+        <div style="border:1px solid rgba(255,255,255,.06);padding:1.4rem 1.8rem;background:rgba(255,255,255,.02)">
+          <div style="font-family:var(--ff-d);font-size:2.2rem;color:var(--fire);line-height:1">+8</div>
+          <div style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ash);margin-top:.25rem">Años de experiencia</div>
+        </div>
+        <div style="border:1px solid rgba(255,255,255,.06);padding:1.4rem 1.8rem;background:rgba(255,255,255,.02)">
+          <div style="font-family:var(--ff-d);font-size:2.2rem;color:var(--fire);line-height:1">2.567%</div>
+          <div style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ash);margin-top:.25rem">ROI máximo conseguido</div>
+        </div>
+        <div style="border:1px solid rgba(255,255,255,.06);padding:1.4rem 1.8rem;background:rgba(255,255,255,.02)">
+          <div style="font-family:var(--ff-d);font-size:2.2rem;color:var(--fire);line-height:1">+300</div>
+          <div style="font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ash);margin-top:.25rem">Pedidos/mes para un cliente</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-in">
+    <div class="cta-hl rv">
+      ¿LISTO<br>PARA<br><span class="red">CRECER?</span>
+    </div>
+    <div class="rv d2">
+      <p>Cuéntanos tu negocio y en 24 horas te contamos exactamente cómo podemos ayudarte. Sin compromiso, sin letra pequeña. Solo una conversación honesta sobre cómo conseguir más clientes.</p>
+      <a href="https://wa.me/34611061767?text=Hola%2C%20me%20gustar%C3%ADa%20que%20analicéis%20mi%20negocio%20y%20veamos%20cómo%20podéis%20ayudarme" class="btn-dark">Solicitar Consulta Gratuita ↗</a>
+      <p class="cta-note">Sin compromiso · Sin letra pequeña · Respuesta en menos de 24h</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contact-lay">
+    <div class="contact-left">
+      <div class="lbl rv">Contacto</div>
+      <h2 class="hd rv d1">HABLEMOS<br><em>HOY</em></h2>
+      <p class="rv d2">Cuéntanos tu proyecto. Nos sentamos contigo, analizamos tu situación y te decimos exactamente qué haríamos. Sin rodeos.</p>
+      <div class="cc-list">
+        <a href="https://wa.me/34611061767?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20más%20información%20sobre%20vuestros%20servicios" class="cc rv" target="_blank">
+          <div class="cc-icon cc-wa">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <div class="cc-txt">
+            <strong>WhatsApp — Respuesta en minutos</strong>
+            <span>+34 611 061 767</span>
+          </div>
+        </a>
+        <a href="tel:+34611061767" class="cc rv d1">
+          <div class="cc-icon cc-tel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--fire)"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.29h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.04z"/></svg></div>
+          <div class="cc-txt">
+            <strong>Teléfono</strong>
+            <span>+34 611 061 767 · Lunes a viernes, 9:00–18:00</span>
+          </div>
+        </a>
+        <a href="mailto:marketing@jesdigitalmkt.com" class="cc rv d2">
+          <div class="cc-icon cc-mail"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--ember)"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div class="cc-txt">
+            <strong>Email</strong>
+            <span>marketing@jesdigitalmkt.com</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="#" class="f-logo">JES<span>·</span>DIGITAL</a>
+    <div class="f-sub">Agencia de Marketing · Socios en tu Crecimiento</div>
+  </div>
+  <div class="f-cg">
+    <div class="f-cl">Teléfono / WhatsApp</div>
+    <div class="f-cv"><a href="tel:+34611061767">+34 611 061 767</a></div>
+  </div>
+  <div class="f-cg">
+    <div class="f-cl">Email</div>
+    <div class="f-cv"><a href="mailto:marketing@jesdigitalmkt.com">marketing@jesdigitalmkt.com</a></div>
+  </div>
+</footer>
+
+<script>
+/* CURSOR */
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-r');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function raf(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(raf)})();
+
+/* PARTICLES */
+(function(){
+  const c=document.getElementById('particles');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let W,H,pts=[];
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+  resize();window.addEventListener('resize',resize);
+  class P{
+    constructor(){this.reset(true)}
+    reset(init){
+      this.x=Math.random()*W;this.y=init?Math.random()*H:Math.random()*H;
+      this.r=Math.random()*.9+.2;
+      this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;
+      this.a=Math.random();this.da=(Math.random()-.5)*.007;
+      this.col=Math.random()<.72?'255,69,0':'201,168,76';
+    }
+    upd(){
+      this.x+=this.vx;this.y+=this.vy;this.a+=this.da;
+      if(this.a<=0||this.a>=1)this.da*=-1;
+      if(this.x<-10||this.x>W+10||this.y<-10||this.y>H+10)this.reset(false);
+    }
+    draw(){
+      ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(${this.col},${this.a*.55})`;ctx.fill();
+    }
+  }
+  for(let i=0;i<80;i++)pts.push(new P());
+  function lines(){
+    for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+      const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<110){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle=`rgba(255,69,0,${(1-d/110)*.1})`;ctx.lineWidth=.4;ctx.stroke()}
+    }
+  }
+  (function loop(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.upd();p.draw()});lines();requestAnimationFrame(loop)})();
+})();
+
+/* REVEAL */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+/* COUNTERS */
+const co=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target,t=+el.dataset.target,dur=1800,step=t/dur*16;let c=0;
+    const tick=()=>{c=Math.min(c+step,t);el.textContent=Math.floor(c).toLocaleString('es-ES');if(c<t)requestAnimationFrame(tick)};
+    tick();co.unobserve(el);
+  });
+},{threshold:.5});
+document.querySelectorAll('.counter').forEach(el=>co.observe(el));
+</script>
+</body>
+</html>
